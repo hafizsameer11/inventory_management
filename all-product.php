@@ -75,13 +75,14 @@ if (isset($_SESSION['uid'])) {
                                                     <th>Delete</th>
                                                 </tr>
                                             </thead>
+                                        
                                             <?php
-                                            include_once 'backend/config/config.php';
-                                            $sql = "SELECT * FROM `product`";
-                                            $result = mysqli_query($mysqli, $sql);
-                                            if (mysqli_num_rows($result) > 0) {
-                                                $i = 1;
-                                                while ($data = mysqli_fetch_assoc($result)) { ?>
+                                            include_once 'backend/controller/db.php';
+                                                    $record=new db();
+                                                    $records=$record->select('*','product');
+                                                $i=1;
+                                                 foreach($records as $data ){
+                                                 ?>
                                                     <tbody>
                                                         <tr>
                                                             <td><?php echo $i?></td>
@@ -103,9 +104,9 @@ if (isset($_SESSION['uid'])) {
                                                     </tbody>
 
                                                     <?php
-                                                    $i += 1;
-                                                }
-                                            } ?>
+                                                    $i++;
+                                                 }
+                                             ?>
                                         </table>
                                     </div>
 
