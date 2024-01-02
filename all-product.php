@@ -97,7 +97,7 @@ if (isset($_SESSION['uid'])) {
                                                                     <i class="fas fa-pencil-alt"></i>
                                                                 </a>
                                                             </td>
-                                                            <td><a class="btn btn-outline-danger btn-sm edit" title="Edit">
+                                                            <td><a class="btn btn-outline-danger btn-sm edit" href="backend/manager/product-manager.php?pid=<?php echo $data['id']?>" title="Edit">
                                                                     <i class="fas fa-pencil-alt"></i>
                                                                 </a></td>
                                                         </tr>

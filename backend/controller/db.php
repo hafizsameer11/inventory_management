@@ -46,10 +46,14 @@ class db{
             return false;
         }
     }
-    public function delete($paramter,$table,$primarykey){
+    public function delete($paramter,$table,$primarykey,$location=null){
         $delete="DELETE FROM `$table` WHERE `$primarykey`=$paramter";
+   
         $sql=mysqli_query($this->mysqli,$delete);
         if($sql){
+            if($location!=null){
+                header('location:'.$location);
+            }
             return true;
 
         }else{
