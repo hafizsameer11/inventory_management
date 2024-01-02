@@ -40,7 +40,7 @@
                         <li><a href="create-product.php" class="">Create product</a>
                            
                         </li>
-                        <li><a href="javascript: void(0);" class="">All product</a>
+                        <li><a href="all-product.php" class="">All product</a>
                            
                         </li>
                         <!-- <li><a href="javascript: void(0);" class="">Horizontal</a> -->
