@@ -1,10 +1,12 @@
 <?php
-class db{
+class db
+{
     protected $mysqli;
-    function __construct() {
-            $this->mysqli=mysqli_connect('localhost','root','','inventory_management');
-      }
-      //inserting data into database
+    function __construct()
+    {
+        $this->mysqli = mysqli_connect('localhost', 'root', '', 'inventory_management');
+    }
+    //inserting data into database
     //   public function insertnew($table,$data){
     //     if(count($data) != 0){
     //         $fields = implode(',',array_keys($data));
@@ -16,63 +18,81 @@ class db{
     //             }
     //   }
 
-   public function insert($query,$location=null){
+    public function insert($query, $location = null)
+    {
 
-        $sql=mysqli_query($this->mysqli,$query);
-        if($sql){
-            if($location!=null){
-                header('location:'.$location);
+        $sql = mysqli_query($this->mysqli, $query);
+        if ($sql) {
+            if ($location != null) {
+                header('location:' . $location);
             }
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-   public function check($parameter,$method){
-        if(isset($method[$parameter])){
+    public function check($parameter, $method)
+    {
+        if (isset($method[$parameter])) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    public function update($query,$location){
-        $sql=mysqli_query($this->mysqli,$query);
-        if($sql){
-            if($location!=null){
-                header('location:'.$location);
-            }
-            return true;
-        }else{
-            return false;
+    // public function update($query,$location){
+    //     $sql=mysqli_query($this->mysqli,$query);
+    //     if($sql){
+    //         if($location!=null){
+    //             header('location:'.$location);
+    //         }
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+    public function update($table, $data, $where)
+    {
+        $query = "UPDATE `" . $table . "` SET ";
+        foreach ($data as $key => $value) {
+            $query .= "`" . $key . "`='" . $value . "',";
         }
+        $query = rtrim($query, ',');
+        $query .= " WHERE " . $where . ";";
+
+        return mysqli_query($this->mysqli, $query);
     }
-    public function delete($paramter,$table,$primarykey,$location=null){
-        $delete="DELETE FROM `$table` WHERE `$primarykey`=$paramter";
-   
-        $sql=mysqli_query($this->mysqli,$delete);
-        if($sql){
-            if($location!=null){
-                header('location:'.$location);
+
+    public function delete($paramter, $table, $primarykey, $location = null)
+    {
+        $delete = "DELETE FROM `$table` WHERE `$primarykey`=$paramter";
+
+        $sql = mysqli_query($this->mysqli, $delete);
+        if ($sql) {
+            if ($location != null) {
+                header('location:' . $location);
             }
             return true;
 
-        }else{
+        } else {
             return false;
         }
     }
-    public function select($column='*',$table,$where=null){
-        if($where==null){
-            $select="SELECT ".$column." FROM `".$table."`;";
-        }else{
-            $select=" SELECT ".$column." FROM `".$table."` WHERE ".$where." ; ";
+    public function select($column = '*', $table, $where = null)
+    {
+        if ($where == null) {
+            $select = "SELECT " . $column . " FROM `" . $table . "`;";
+        } else {
+            $select = " SELECT " . $column . " FROM `" . $table . "` WHERE " . $where . " ; ";
         }
-        $result=mysqli_query($this->mysqli,$select);
-        $records=[];
-        while($row=mysqli_fetch_assoc($result)){
+        $result = mysqli_query($this->mysqli, $select);
+        $records = [];
+        while ($row = mysqli_fetch_assoc($result)) {
             array_push($records, $row);
         }
         return $records;
     }
+
+
     // public function select($select='*',$from,$where=null) {
     //     if($where==null){
     //         $selct="SELECT $select FROM $from ";
