@@ -9,6 +9,17 @@ if (isset($_SESSION['uid'])) {
 } else {
     header('location:login.php');
 }
+
+if(isset($_SESSION['status']) ){
+    echo "Hello wolrd";
+    echo "<script>swal('Success','{$_SESSION['message']}','success')</script>";
+    unset($_SESSION['status']);
+    unset($_SESSION['message']);
+    unset($_SESSION['success']);
+
+  
+}
+
 ?>
 
 <body data-layout="detached" data-topbar="colored">
@@ -93,7 +104,7 @@ if (isset($_SESSION['uid'])) {
                                                             <td><?php echo $data['SKU'] ?></td>
                                                             <td><?php echo $data['product_code'] ?></td>
                                                             <td>
-                                                                <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
+                                                                <a href="update-product.php?pid=<?php echo $data['id']?>" class="btn btn-outline-secondary btn-sm edit" title="Edit">
                                                                     <i class="fas fa-pencil-alt"></i>
                                                                 </a>
                                                             </td>

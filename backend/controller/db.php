@@ -55,6 +55,7 @@ class db
         $query = "UPDATE `" . $table . "` SET ";
         foreach ($data as $key => $value) {
             $query .= "`" . $key . "`='" . $value . "',";
+            // $query.=`title`='
         }
         $query = rtrim($query, ',');
         $query .= " WHERE " . $where . ";";
@@ -69,7 +70,13 @@ class db
         $sql = mysqli_query($this->mysqli, $delete);
         if ($sql) {
             if ($location != null) {
+                session_start();
+                $_SESSION['message'] = 'Data deleted';
+                $_SESSION['status']=true;
+                $_SESSION['success']='success';
                 header('location:' . $location);
+                exit();
+
             }
             return true;
 
@@ -81,14 +88,18 @@ class db
     {
         if ($where == null) {
             $select = "SELECT " . $column . " FROM `" . $table . "`;";
-        } else {
+            $result = mysqli_query($this->mysqli, $select);
+            $records = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                array_push($records, $row);
+            }
+        }
+        else {
             $select = " SELECT " . $column . " FROM `" . $table . "` WHERE " . $where . " ; ";
+            $result = mysqli_query($this->mysqli, $select);
+            $records =mysqli_fetch_assoc($result);
         }
-        $result = mysqli_query($this->mysqli, $select);
-        $records = [];
-        while ($row = mysqli_fetch_assoc($result)) {
-            array_push($records, $row);
-        }
+       
         return $records;
     }
 

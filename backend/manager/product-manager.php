@@ -1,7 +1,6 @@
 <?php
-include_once '../config/config.php';
-include_once '../controller/dbfunctions.php';
 include_once '../controller/db.php';
+include_once '../controller/dbfunctions.php';
 $db=new db();
 $check = check('create', $_POST);
 if ($check) {
@@ -22,5 +21,17 @@ if(isset($_GET['pid'])){
     echo "failed";
    }
 }
+if(isset($_POST['update'])){
+  $record=$_POST;
+  $pid=$_POST['pid'];
+  $condition = "`id`='$pid'";
+  unset($record['pid']);
+  unset($record['update']);
+ if( $db->update('product',$record,$condition)){
+    header('Location:../../all-product.php');
+ }else{
+    echo"rror";
+ }
 
+}
 ?>
