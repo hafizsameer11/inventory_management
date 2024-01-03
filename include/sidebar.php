@@ -52,6 +52,26 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-flip-horizontal"></i>
+                        <span>User module</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="true">
+                        
+
+                        <li><a href="create-user.php" class="">Create New User</a>
+                           
+                        </li>
+                        <li><a href="all-user.php" class="">All Users</a>
+                           
+                        </li>
+                        <!-- <li><a href="javascript: void(0);" class="">Horizontal</a> -->
+                           
+                        </li>
+                    </ul>
+
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="mdi mdi-flip-horizontal"></i>
                         <span>Category module</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
