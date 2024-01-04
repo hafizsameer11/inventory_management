@@ -71,9 +71,9 @@ if (isset($_SESSION['uid']) && isset($_GET['pid'])) {
 
                                     <form class="custom-validation" action="backend\manager\product-manager.php" novalidate="" method="post">
                                         <div class="row">
-                                   
-                                                <input type="text" name="pid" hidden class="form-control" value="<?php echo $record['id'] ?>" placeholder="Type something">
-                                     
+
+                                            <input type="text" name="pid" hidden class="form-control" value="<?php echo $record['id'] ?>" placeholder="Type something">
+
                                             <div class="mb-3 col-lg-6">
                                                 <label class="form-label">Product title</label>
                                                 <input type="text" name="title" class="form-control" value="<?php echo $record['title'] ?>" placeholder="Type something">
@@ -90,22 +90,19 @@ if (isset($_SESSION['uid']) && isset($_GET['pid'])) {
                                                 <label class="form-label"> Category </label>
                                                 <select name="cat_id" class="form-control">
                                                     <option value="">Select category</option>
-                                                    <?php
-                                                    $cat_id = $record['cat_id'];
-                                                    $condition = "`cat_id`='$cat_id'";
-                                                    $select = $db->select('*','categories',$condition);
-                                                    ?>
-                                                    <option value="<?php echo $select['cat_id']?>" selected><?php echo $select['cat_name']?></option>
+
                                                     <?php
                                                     include_once 'backend/controller/db.php';
                                                     $category = new db();
                                                     $catories = $category->select('*', 'categories');
-                                                    foreach ($catories as $value) { ?>
-                                                        <option value="<?php echo $value['cat_id']?>"><?php echo $value['cat_name']?></option>
-                                                    <?php
-                                                    }
+
+                                                    foreach ($catories as $value) {
+                                                        $selected = ($value['cat_id'] == $record['cat_id']) ? 'selected' : '';
                                                     ?>
+                                                        <option value="<?php echo $value['cat_id'] ?>" <?php echo $selected ?>><?php echo $value['cat_name'] ?></option>
+                                                    <?php } ?>
                                                 </select>
+
                                             </div>
 
 
