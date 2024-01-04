@@ -1,9 +1,9 @@
 <?php
 include_once '../config/config.php';
 
-$producttable = "CREATE TABLE Categories (
+$producttable = "CREATE TABLE categories (
     cat_id INT PRIMARY KEY AUTO_INCREMENT,
-    cat_Name VARCHAR(255) NOT NULL
+    cat_name VARCHAR(255) NOT NULL
 );";
 $sql = mysqli_query($mysqli, $producttable);
 if (!$sql) {
