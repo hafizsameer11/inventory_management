@@ -10,14 +10,14 @@ if (isset($_SESSION['uid'])) {
     header('location:login.php');
 }
 
-if (isset($_SESSION['status'])) {
-    echo "Hello wolrd";
+if(isset($_SESSION['status']) ){
     echo "<script>swal('Success','{$_SESSION['message']}','success')</script>";
     unset($_SESSION['status']);
     unset($_SESSION['message']);
     unset($_SESSION['success']);
-}
 
+  
+}
 ?>
 
 <body data-layout="detached" data-topbar="colored">
@@ -76,55 +76,39 @@ if (isset($_SESSION['status'])) {
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Title</th>
-                                                    <th>Price</th>
-                                                    <th>SKU</th>
-                                                    <th>Product Code</th>
-                                                    <th>Category</th>
+                                                    <th>name</th>
                                                     <th>Edit</th>
                                                     <th>Delete</th>
                                                 </tr>
                                             </thead>
-
+                                        
                                             <?php
                                             include_once 'backend/controller/db.php';
-                                            $record = new db();
-                                            $records = $record->select('*', 'product');
-                                            $i = 1;
-                                            foreach ($records as $data) {
-                                            ?>
-                                                <tbody>
-                                                    <tr>
-                                                        <td><?php echo $i ?></td>
-                                                        <td>
-                                                            <?php echo $data['title'] ?>
-                                                        </td>
-                                                        <td><?php echo $data['price'] ?></td>
-                                                        <td><?php echo $data['SKU'] ?></td>
-                                                        <td><?php echo $data['product_code'] ?></td>
-                                                        <td>
-                                                            <?php 
-                                                            $cid = $data['cat_id'];
-                                                            $condition = "`cat_id`='$cid'";
-                                                            $records = $record->select('cat_name','categories',$condition);
-                                                            echo $records['cat_name'];
-                                                            ?>
-                                                        </td>
-                                                        <td>
-                                                            <a href="update-product.php?pid=<?php echo $data['id'] ?>" class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                        <td><a class="btn btn-outline-danger btn-sm edit" href="backend/manager/product-manager.php?pid=<?php echo $data['id'] ?>" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a></td>
-                                                    </tr>
-                                                </tbody>
+                                                    $record=new db();
+                                                    $records=$record->select('*','categories');
+                                                $i=1;
+                                                 foreach($records as $data ){
+                                                 ?>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><?php echo $i?></td>
+                                                            <td>
+                                                                <?php echo $data['cat_name'] ?>
+                                                            <td>
+                                                                <a href="update-category.php?cid=<?php echo $data['cat_id']?>" class="btn btn-outline-secondary btn-sm edit" title="Edit">
+                                                                    <i class="fas fa-pencil-alt"></i>
+                                                                </a>
+                                                            </td>
+                                                            <td><a class="btn btn-outline-danger btn-sm edit" href="backend/manager/category-manager.php?cid=<?php echo $data['cat_id']?>" title="Edit">
+                                                                    <i class="fas fa-pencil-alt"></i>
+                                                                </a></td>
+                                                        </tr>
+                                                    </tbody>
 
-                                            <?php
-                                                $i++;
-                                            }
-                                            ?>
+                                                    <?php
+                                                    $i++;
+                                                 }
+                                             ?>
                                         </table>
                                     </div>
 

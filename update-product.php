@@ -86,10 +86,27 @@ if (isset($_SESSION['uid']) && isset($_GET['pid'])) {
                                                 <label class="form-label"> SKU </label>
                                                 <input type="text" value="<?php echo $record['SKU'] ?>" name="sku" class="form-control" placeholder="Type something">
                                             </div>
-                                            <!-- <div class="mb-3 col-lg-6">
-                                                <label class="form-label"> SKU </label>
-                                                <input type="text" name="sku" class="form-control" placeholder="Type something">
-                                            </div> -->
+                                            <div class="mb-3 col-lg-6">
+                                                <label class="form-label"> Category </label>
+                                                <select name="cat_id" class="form-control">
+                                                    <option value="">Select category</option>
+                                                    <?php
+                                                    $cat_id = $record['cat_id'];
+                                                    $condition = "`cat_id`='$cat_id'";
+                                                    $select = $db->select('*','categories',$condition);
+                                                    ?>
+                                                    <option value="<?php echo $select['cat_id']?>" selected><?php echo $select['cat_name']?></option>
+                                                    <?php
+                                                    include_once 'backend/controller/db.php';
+                                                    $category = new db();
+                                                    $catories = $category->select('*', 'categories');
+                                                    foreach ($catories as $value) { ?>
+                                                        <option value="<?php echo $value['cat_id']?>"><?php echo $value['cat_name']?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
 
 
                                             <div class="mb-3 col-lg-6">

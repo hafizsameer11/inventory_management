@@ -41,7 +41,7 @@ if (isset($_SESSION['uid'])) {
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="page-title mb-0 font-size-18">Create Product</h4>
+                                <h4 class="page-title mb-0 font-size-18">Create category</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
@@ -56,57 +56,16 @@ if (isset($_SESSION['uid'])) {
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Add a new product</h4>
+                                    <h4 class="card-title">Add a new Category</h4>
 
-                                    <form class="custom-validation" action="backend\manager\product-manager.php" novalidate="" method="post">
+                                    <form class="custom-validation" action="backend\manager\category-manager.php" novalidate="" method="post">
                                         <div class="row">
                                             <div class="mb-3 col-lg-6">
-                                                <label class="form-label">Product title</label>
-                                                <input type="text" name="title" class="form-control" placeholder="Type something">
-                                            </div>
-                                            <div class="mb-3 col-lg-6">
-                                                <label class="form-label"> Product Code</label>
-                                                <input type="text" name="product_code" class="form-control" placeholder="Type something">
-                                            </div>
-                                            <div class="mb-3 col-lg-6">
-                                                <label class="form-label"> SKU </label>
-                                                <input type="text" name="sku" class="form-control" placeholder="Type something">
-                                            </div>
-                                            <div class="mb-3 col-lg-6">
-                                                <label class="form-label"> Category </label>
-                                                <select name="cat_id" class="form-control">
-                                                    <option value="">Select category</option>
-                                                    <?php
-                                                    include_once 'backend/controller/db.php';
-                                                    $record = new db();
-                                                    $records = $record->select('*', 'categories');
-                                                    foreach ($records as $value) { ?>
-                                                        <option value="<?php echo $value['cat_id']?>"><?php echo $value['cat_name']?></option>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-
-
-                                            <div class="mb-3 col-lg-6">
-                                                <label class="form-label">Product Price</label>
-                                                <div>
-                                                    <input type="text" id="" class="form-control" name="price" placeholder="e.g 100">
-                                                </div>
-
+                                                <label class="form-label">Category Name</label>
+                                                <input type="text" name="name" class="form-control" placeholder="Type something">
                                             </div>
                                         </div>
-
-
-
                                         <div class="mb-3">
-                                            <label class="form-label">Textarea</label>
-                                            <div>
-                                                <textarea required="" class="form-control" rows="5" name="discription"></textarea>
-                                            </div>
-                                        </div>
-                                        <div>
                                             <div>
                                                 <button type="submit" class="btn btn-primary waves-effect waves-light me-1" name="create">
                                                     Submit

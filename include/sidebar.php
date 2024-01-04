@@ -77,10 +77,10 @@
                     <ul class="sub-menu" aria-expanded="true">
                         
 
-                        <li><a href="javascript: void(0);" class="">Create category</a>
+                        <li><a href="create-category.php" class="">Create category</a>
                            
                         </li>
-                        <li><a href="javascript: void(0);" class="">All category</a>
+                        <li><a href="all-category.php" class="">All category</a>
                            
                         </li>
                         <!-- <li><a href="javascript: void(0);" class="">Horizontal</a> -->

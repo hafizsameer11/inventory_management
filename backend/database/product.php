@@ -8,6 +8,7 @@ $producttable="CREATE TABLE product (
     SKU VARCHAR(255),
     product_code VARCHAR(255),
     discription VARCHAR(255),
+    cat_id INT(255),
     reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     )";
     $sql=mysqli_query($mysqli,$producttable);
